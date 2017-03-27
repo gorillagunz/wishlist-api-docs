@@ -144,3 +144,25 @@ object containing a userid, title, description, product url and thumbnail url.
             },
             "message": "Success"
         }
+        
+## Remove Wishlist Item [/api/users/{userid}/wishlist/{itemid}]
++ Parameters
+    + userid (number) - ID of User whose wishlist we would like to view
+    + itemid (number) - ID of item we would like to remove from wishlist
+
+### Delete items from a Users Wishlist [DELETE]
+Delete an item from a specific users' wishlist.
+
++ Request (application/json)
+
+        {
+            "itemid": 3,
+        }
+
++ Response 200 (application/json)
+
+        {
+            "errors": null,
+            "data": {}
+            "message": "Success"
+        }
