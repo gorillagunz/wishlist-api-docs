@@ -1,0 +1,137 @@
+FORMAT: 1A
+HOST: http://0.0.0.0:8080/
+
+# Wishlist
+
+Wishlist is a simple API that allows a user to create and share their wishlist with their friends and family.
+
+## Thumbnail Processing [/api/thumbnails/process]
+### Get thumbnail images from a URL [GET]
+
++ Request (application/json)
+
+        {
+            "url": "http://example.com"
+        }
+        
++ Response 200 (application/json)
+
+        [
+            "error": null,
+            "data":
+                "thumbnails": [
+                    "http://example.com/images/someimage.jpg",
+                    "https://example.com/thumbs/test.png",
+                    "https://example.com/img/another image.jpg",
+                ],
+            "message": "Success"
+        ]
+        
+## User Registration [/api/users/register]
+### Register a User [POST]
+
++ Request (application/json)
+
+        {
+            "email": "test@example.com",
+            "name": "Test User",
+            "password": "password123",
+            "age": 26,
+            "gender": "female",
+            "image": "avatar.jpg"
+        }
+        
++ Response 200 (application/json)
+        
+        {
+            "error": null,
+            "data": {
+                "user": {
+                    "id": 1,
+                    "name": "Test User",
+                    "email": "test@example.com",
+                    "age": 26,
+                    "gender": "female",
+                    "image": "avatar.jpg"
+                }
+            },
+            "message": "Success"
+        }
+        
+## User Login [/api/users/login]
+### Login a User [POST]
+
++ Request (application/json)
+
+        {
+           "email": "test@example.com",
+           "password": "password123"
+        }
+        
++ Response 200 (application/json)
+        
+        {
+            "error": null,
+            "data": {
+                "user": {
+                    "email": "test@example.com",
+                    "name": "Test user"
+                }
+            },
+            "message": "Bad email or password"
+        }
+
+## Wishlist Collection [/api/users/{userid}/wishlist]
++ Parameters
+    + userid (number) - ID of User whose wishlist we would like to view
+
+### List All Items in a Users Wishlist [GET]
+
++ Response 200 (application/json)
+
+        [
+            {
+                "id": 1,
+                "title": "Roku Premiere",
+                "description": "The new Roku Premiere delivers powerful streaming with a quad-core processor, brilliant 4K picture quality",
+                "url": "http://example.com/product/roku",
+                "thumbnail_url": "http://example.com/images/someimage.jpg"
+            },
+            {
+                "id": 2,
+                "title": "Samsung Galaxy S8",
+                "description": "The new Samsung Galaxy S8 is the best smartphone ever!",
+                "url": "http://example.com/product/samsung-galaxy-s8",
+                "thumbnail_url": "http://example.com/images/samsung-s8-phone.png"
+            },            
+        ]
+
+### Create a New Wishlist Item [POST]
+
+You may create new wishlist items using this action. It takes a JSON
+object containing a userid, title, description, product url and thumbnail url.
+
++ Request (application/json)
+
+        {
+            "title": "Macbook Pro",
+            "description": "The new Macbook Pro comes with a Touchbar",
+            "url": "http://example.com/product/macbook-pro",
+            "thumbnail_url": "http://example.com/images/macbook-pro-15inch.png"
+        }
+
++ Response 201 (application/json)
+
+        {
+            "error": null,
+            "data": {
+                "item": {
+                    "id": 3
+                    "title": "Macbook Pro",
+                    "description": "The new Macbook Pro comes with a Touchbar",
+                    "url": "http://example.com/product/macbook-pro",
+                    "thumbnail_url": "http://example.com/images/macbook-pro-15inch.png"
+                }
+            },
+            "message": "Success"
+        }
