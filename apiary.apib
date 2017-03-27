@@ -7,6 +7,7 @@ Wishlist is a simple API that allows a user to create and share their wishlist w
 
 ## Thumbnail Processing [/api/thumbnails/process]
 ### Get thumbnail images from a URL [GET]
+Take a url and scrape the page for any images and return the URL for each image found.
 
 + Request (application/json)
 
@@ -29,6 +30,7 @@ Wishlist is a simple API that allows a user to create and share their wishlist w
         
 ## User Registration [/api/users/register]
 ### Register a User [POST]
+Registers a new user in our wishlist web application.
 
 + Request (application/json)
 
@@ -86,25 +88,32 @@ Wishlist is a simple API that allows a user to create and share their wishlist w
     + userid (number) - ID of User whose wishlist we would like to view
 
 ### List All Items in a Users Wishlist [GET]
+Get all the items in a specific users' wishlist.
 
 + Response 200 (application/json)
 
-        [
-            {
-                "id": 1,
-                "title": "Roku Premiere",
-                "description": "The new Roku Premiere delivers powerful streaming with a quad-core processor, brilliant 4K picture quality",
-                "url": "http://example.com/product/roku",
-                "thumbnail_url": "http://example.com/images/someimage.jpg"
-            },
-            {
-                "id": 2,
-                "title": "Samsung Galaxy S8",
-                "description": "The new Samsung Galaxy S8 is the best smartphone ever!",
-                "url": "http://example.com/product/samsung-galaxy-s8",
-                "thumbnail_url": "http://example.com/images/samsung-s8-phone.png"
-            },            
-        ]
+        {
+            "errors": null,
+            "data": { 
+                "items": [
+                    {
+                        "id": 1,
+                        "title": "Roku Premiere",
+                        "description": "The new Roku Premiere delivers powerful streaming with a quad-core processor, brilliant 4K picture quality",
+                        "url": "http://example.com/product/roku",
+                        "thumbnail_url": "http://example.com/images/someimage.jpg"
+                    },
+                    {
+                        "id": 2,
+                        "title": "Samsung Galaxy S8",
+                        "description": "The new Samsung Galaxy S8 is the best smartphone ever!",
+                        "url": "http://example.com/product/samsung-galaxy-s8",
+                        "thumbnail_url": "http://example.com/images/samsung-s8-phone.png"
+                    },            
+                ]
+            }
+            "message": "Success"
+        }
 
 ### Create a New Wishlist Item [POST]
 
