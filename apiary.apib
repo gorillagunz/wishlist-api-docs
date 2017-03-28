@@ -1,13 +1,16 @@
 FORMAT: 1A
-HOST: http://0.0.0.0:8080/
 
 # Wishlist
 
-Wishlist is a simple API that allows a user to create and share their wishlist with their friends and family.
+Wishlist is a simple API that allows a user to create and share their wishlist with friends and family.
 
-## Thumbnail Processing [/api/thumbnails/process]
+## Thumbnail Processing [/api/thumbnails]
 ### Get thumbnail images from a URL [GET]
 Take a url and scrape the page for any images and return the URL for each image found.
+
+If there is an error then set the `error` property to `true` and leave the `data` property
+as an empty object. Also ensure that the `message` property is set with the appropriate error
+message.
 
 + Request (application/json)
 
@@ -17,7 +20,7 @@ Take a url and scrape the page for any images and return the URL for each image 
         
 + Response 200 (application/json)
 
-        [
+        {
             "error": null,
             "data":
                 "thumbnails": [
@@ -26,7 +29,15 @@ Take a url and scrape the page for any images and return the URL for each image 
                     "https://example.com/img/another image.jpg",
                 ],
             "message": "Success"
-        ]
+        }
+        
++ Response 200 (application/json)
+
+        {
+            "error": true,
+            "data": {}
+            "message": "Unable to extract thumbnails"
+        }
         
 ## User Registration [/api/users/register]
 ### Register a User [POST]
@@ -44,7 +55,7 @@ Registers a new user in our wishlist web application.
         }
         
 + Response 200 (application/json)
-        
+
         {
             "error": null,
             "data": {
@@ -62,6 +73,9 @@ Registers a new user in our wishlist web application.
         
 ## User Login [/api/users/login]
 ### Login a User [POST]
+If there is an error then set the `error` property to `true` and leave the `data` property
+as an empty object. Also ensure that the `message` property is set with the appropriate error
+message.
 
 + Request (application/json)
 
@@ -71,7 +85,7 @@ Registers a new user in our wishlist web application.
         }
         
 + Response 200 (application/json)
-        
+
         {
             "error": null,
             "data": {
@@ -80,7 +94,15 @@ Registers a new user in our wishlist web application.
                     "name": "Test user"
                 }
             },
-            "message": "Bad email or password"
+            "message": "Success"
+        }
+        
++ Response 200 (application/json)
+
+        {
+            "error": true,
+            "data": {}
+            "message": "Incorrect email or password."
         }
 
 ## Wishlist Collection [/api/users/{userid}/wishlist]
@@ -89,6 +111,10 @@ Registers a new user in our wishlist web application.
 
 ### List All Items in a Users Wishlist [GET]
 Get all the items in a specific users' wishlist.
+
+If there is an error then set the `error` property to `true` and leave the `data` property
+as an empty object. Also ensure that the `message` property is set with the appropriate error
+message.
 
 + Response 200 (application/json)
 
@@ -113,6 +139,14 @@ Get all the items in a specific users' wishlist.
                 ]
             }
             "message": "Success"
+        }
+        
++ Response 200 (application/json)
+
+        {
+            "error": true,
+            "data": {}
+            "message": "No wishlist exists."
         }
 
 ### Create a New Wishlist Item [POST]
