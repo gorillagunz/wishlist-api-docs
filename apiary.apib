@@ -1,4 +1,5 @@
 FORMAT: 1A
+HOST: http://example.com
 
 # Wishlist
 
@@ -14,9 +15,15 @@ message.
 
 + Request (application/json)
 
-        {
-            "url": "http://example.com"
-        }
+    + Headers
+    
+            Authorization: Basic <token>
+    
+    + Body
+
+            {
+                "url": "http://example.com"
+            }
         
 + Response 200 (application/json)
 
@@ -45,14 +52,20 @@ Registers a new user in our wishlist web application.
 
 + Request (application/json)
 
-        {
-            "email": "test@example.com",
-            "name": "Test User",
-            "password": "password123",
-            "age": 26,
-            "gender": "female",
-            "image": "avatar.jpg"
-        }
+    + Headers
+    
+            Authorization: Basic <token>
+    
+    + Body
+    
+            {
+                "email": "test@example.com",
+                "name": "Test User",
+                "password": "password123",
+                "age": 26,
+                "gender": "female",
+                "image": "avatar.jpg"
+            }
         
 + Response 200 (application/json)
 
@@ -79,10 +92,16 @@ message.
 
 + Request (application/json)
 
-        {
-           "email": "test@example.com",
-           "password": "password123"
-        }
+    + Headers
+    
+            Authorization: Basic <token>
+    
+    + Body
+    
+            {
+               "email": "test@example.com",
+               "password": "password123"
+            }
         
 + Response 200 (application/json)
 
@@ -115,6 +134,16 @@ Get all the items in a specific users' wishlist.
 If there is an error then set the `error` property to `true` and leave the `data` property
 as an empty object. Also ensure that the `message` property is set with the appropriate error
 message.
+
++ Request (application/json)
+
+    + Headers
+    
+            Authorization: Basic <token>
+    
+    + Body
+    
+            {}
 
 + Response 200 (application/json)
 
@@ -156,12 +185,18 @@ object containing a userid, title, description, product url and thumbnail url.
 
 + Request (application/json)
 
-        {
-            "title": "Macbook Pro",
-            "description": "The new Macbook Pro comes with a Touchbar",
-            "url": "http://example.com/product/macbook-pro",
-            "thumbnail_url": "http://example.com/images/macbook-pro-15inch.png"
-        }
+    + Headers
+    
+            Authorization: Basic <token>
+    
+    + Body
+    
+            {
+                "title": "Macbook Pro",
+                "description": "The new Macbook Pro comes with a Touchbar",
+                "url": "http://example.com/product/macbook-pro",
+                "thumbnail_url": "http://example.com/images/macbook-pro-15inch.png"
+            }
 
 + Response 201 (application/json)
 
@@ -189,9 +224,15 @@ Delete an item from a specific users' wishlist.
 
 + Request (application/json)
 
-        {
-            "itemid": 3,
-        }
+    + Headers
+    
+            Authorization: Basic <token>
+    
+    + Body
+    
+            {
+                "itemid": 3,
+            }r
 
 + Response 200 (application/json)
 
